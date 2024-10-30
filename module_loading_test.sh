@@ -2,7 +2,6 @@
 #SBATCH --export=ALL
 #SBATCH -p mrcq 
 #SBATCH --time=00:01:00
-#SBATCH --array=1-100
 #SBATCH -A Research_Project-MRC190311 
 #SBATCH --nodes=1 
 #SBATCH --ntasks-per-node=16
@@ -15,11 +14,11 @@
 usage() {
     file_name=$(basename "$0")
 cat << EOF
-============================================================
-Usage: sbatch .../$file_name module_name command
-============================================================
-Example: sbatch .../$file_name Java/13.0.2 java
-============================================================
+=============================================================
+Usage: sbatch --array=x-y .../$file_name module_name command
+=============================================================
+Example: sbatch --array=1-100 .../$file_name Java/13.0.2 java
+=============================================================
 EOF
     exit 0
 }
@@ -53,7 +52,7 @@ main() {
     fi
 }
 
-if [[ $# -ne 2 || -z "${SLURM_JOB_ID}" ]]; then 
+if [[ $# -ne 2 || -z "${SLURM_ARRAY_TASK_ID}" ]]; then 
     usage
 else
     move_logs

@@ -13,11 +13,12 @@
 #SBATCH --job-name=test
 
 usage() {
+    file_name=$(basename "$0")
 cat << EOF
 ============================================================
-Usage: sbatch .../module_loading_test.sh module_name command
+Usage: sbatch .../$file_name module_name command
 ============================================================
-Example: sbatch module_loading_test.sh Java/13.0.2 java
+Example: sbatch .../$file_name Java/13.0.2 java
 ============================================================
 EOF
     exit 0

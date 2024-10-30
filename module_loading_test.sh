@@ -26,7 +26,7 @@ EOF
 
 move_logs() {
     mkdir -p logs
-    mv test_${SLURM_ARRAY_TASK_ID}.* logs
+    mv "test_${SLURM_ARRAY_TASK_ID}."* logs
 }
 
 check_cmd() {
@@ -44,7 +44,7 @@ main() {
     module_name=$1
     cmd=$2
     module load "${module_name}"
-    node=$(get_node ${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID})
+    node=$(get_node "${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}")
 
     if check_cmd "${cmd}"; then
         echo "SUCCESS on ${node}"
@@ -53,9 +53,9 @@ main() {
     fi
 }
 
-if [[ $# -ne 2 || -z ${SLURM_JOB_ID} ]]; then 
+if [[ $# -ne 2 || -z "${SLURM_JOB_ID}" ]]; then 
     usage
 else
     move_logs
-    main $1 $2
+    main "$1" "$2"
 fi

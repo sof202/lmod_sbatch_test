@@ -3,7 +3,8 @@
 extract_nodes() {
     pattern=$1
     out_file=$2
-    grep "${pattern}" "logs/*" >> "${out_file}"
+    grep "${pattern}" "logs/"* >> "${out_file}"
+    sed -i 's/.*on //g' "${out_file}"
 }
 
 sort_and_unique() {
@@ -15,7 +16,7 @@ sort_and_unique() {
 }
 
 main() {
-    cd $0 | exit 1
+    cd $(dirname "$0") | exit 1
     extract_nodes "SUCCESS" "success.txt"
     extract_nodes "ERROR" "errors.txt"
     sort_and_unique "success.txt"

@@ -53,5 +53,11 @@ mrc-comp064
 mrc-comp065
 mrc-comp066
 mrc-comp067
+mrc-comp069
+mrc-comp070
+mrc-comp071
+mrc-comp072
+mrc-comp073
+mrc-comp074
 mrc-comp091
 mrc-comp092
